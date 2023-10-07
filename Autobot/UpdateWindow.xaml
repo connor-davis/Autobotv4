@@ -9,7 +9,7 @@
     <Border Background="#FFFFFF" BorderBrush="#d4d4d4" BorderThickness="1" CornerRadius="5">
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label Content="Autobot" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Foreground="#404040"></Label>
-            <Label Content="Checking for updates. Please be patient" HorizontalAlignment="Center"  Foreground="#404040"></Label>
+            <Label x:Name="UpdateStatus" Content="Checking for updates. Please be patient" HorizontalAlignment="Center"  Foreground="#404040"></Label>
         </StackPanel>
     </Border>
 </Window>

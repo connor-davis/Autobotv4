@@ -10,7 +10,5 @@ public class SilentShotConfiguration
     public Key WeaponSwapKey { get; set; } = Key.D1;
     public int LethalKeyDelay { get; set; } = 21;
     public int WeaponSwapKeyDelay { get; set; } = 100;
-    public int FinalWeaponSwapKeyDelay { get; set; } = 35;
-    public int FinalLethalKeyDelay { get; set; } = 25;
     public bool Enabled { get; set; } = false;
 }

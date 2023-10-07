@@ -125,42 +125,4 @@ public partial class SilentShotDialog
             // ignored
         }
     }
-
-    private void FinalWeaponSwapKeyDelayTxtBx_OnTextChanged(object sender, TextChangedEventArgs e)
-    {
-        try
-        {
-            var delay = int.Parse(FinalWeaponSwapKeyDelayTxtBx.Text);
-            
-            var configuration = MainWindow.GetConfiguration();
-
-            if (configuration is not { SilentShotConfiguration: not null }) return;
-
-            configuration.SilentShotConfiguration.FinalWeaponSwapKeyDelay = delay;
-            SLAPI.WriteToJsonFile("autobot-config.json", configuration);
-        }
-        catch
-        {
-            // ignored
-        }
-    }
-
-    private void FinalLethalKeyDelay_OnTextChanged(object sender, TextChangedEventArgs e)
-    {
-        try
-        {
-            var delay = int.Parse(FinalLethalKeyDelay.Text);
-            
-            var configuration = MainWindow.GetConfiguration();
-
-            if (configuration is not { SilentShotConfiguration: not null }) return;
-
-            configuration.SilentShotConfiguration.FinalLethalKeyDelay = delay;
-            SLAPI.WriteToJsonFile("autobot-config.json", configuration);
-        }
-        catch
-        {
-            // ignored
-        }
-    }
 }

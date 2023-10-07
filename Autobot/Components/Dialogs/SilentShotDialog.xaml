@@ -104,22 +104,6 @@
                             </ToggleButton>
                             <Label Content="This is the key you use to swap to your primary weapon." FontSize="10" Foreground="#737373"></Label>
                         </StackPanel>
-                        
-                        <StackPanel Orientation="Vertical">
-                            <Label Content="Final Weapon Swap Key Delay" Foreground="#737373" />
-                            
-                            <TextBox x:Name="FinalWeaponSwapKeyDelayTxtBx" TextChanged="FinalWeaponSwapKeyDelayTxtBx_OnTextChanged" Text="{Binding SilentShotConfiguration.FinalWeaponSwapKeyDelay}" InputScope="Number"/>
-                            
-                            <TextBlock Text="This is the delay before your weapon swap key gets released in milliseconds." FontSize="10" Foreground="#737373"></TextBlock>
-                        </StackPanel>
-                        
-                        <StackPanel Orientation="Vertical">
-                            <Label Content="Final Lethal Key Delay" Foreground="#737373" />
-                            
-                            <TextBox x:Name="FinalLethalKeyDelay" TextChanged="FinalLethalKeyDelay_OnTextChanged" Text="{Binding SilentShotConfiguration.FinalLethalKeyDelay}" InputScope="Number"/>
-                            
-                            <Label Content="This is the delay before your lethal key is released in milliseconds." FontSize="10" Foreground="#737373"></Label>
-                        </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
             </Grid>

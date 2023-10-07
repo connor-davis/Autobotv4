@@ -38,8 +38,6 @@ namespace Autobot
                     WeaponSwapKey = Key.D1,
                     LethalKeyDelay = 21,
                     WeaponSwapKeyDelay = 100,
-                    FinalWeaponSwapKeyDelay = 35,
-                    FinalLethalKeyDelay = 25,
                     Enabled = false
                 }
             };

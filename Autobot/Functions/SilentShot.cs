@@ -16,12 +16,12 @@ public static class SilentShot
         
         Thread.Sleep(configuration.LethalKeyDelay);
         KeyDown(KeyMapper.GetSharpHookKeyCode(configuration.LethalKey));
+        Thread.Sleep(1);
+        KeyUp(KeyMapper.GetSharpHookKeyCode(configuration.LethalKey));
         Thread.Sleep(configuration.WeaponSwapKeyDelay);
         KeyDown(KeyMapper.GetSharpHookKeyCode(configuration.WeaponSwapKey));
-        Thread.Sleep(configuration.FinalWeaponSwapKeyDelay);
+        Thread.Sleep(5);
         KeyUp(KeyMapper.GetSharpHookKeyCode(configuration.WeaponSwapKey));
-        Thread.Sleep(configuration.FinalLethalKeyDelay);
-        KeyUp(KeyMapper.GetSharpHookKeyCode(configuration.LethalKey));
     }
 
     private static void KeyDown(KeyCode keyCode)
