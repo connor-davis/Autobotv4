@@ -17,7 +17,7 @@ public static class AutoUpdater
         
         var latestGithubVersion = new Version(releases[0].TagName.Replace("v", ""));
         Console.WriteLine($"Latest Github Version: {latestGithubVersion}");
-        var latestLocalVersion = new Version("1.0.1");
+        var latestLocalVersion = new Version("1.0.2");
         Console.WriteLine($"Latest Local Version: {latestLocalVersion}");
         
         var versionComparison = latestLocalVersion.CompareTo(latestGithubVersion);
