@@ -1,0 +1,134 @@
+﻿<UserControl x:Class="Autobot.Components.Dialogs.SlideCancelDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Autobot.Components.Dialogs"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Border Background="#e5e5e5" Padding="5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Button x:Name="CloseBtn" Style="{StaticResource DialogButton}" FontSize="15" FontWeight="Bold" Content="←" Click="CloseBtn_OnClick"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="Slide Key" Foreground="#737373" />
+                            <ToggleButton x:Name="SlideKey" Click="SlideKey_OnClick" Content="{Binding SlideCancelConfiguration.SlideKey, Mode=TwoWay}">
+                                <ToggleButton.Style>
+                                    <Style TargetType="ToggleButton">
+                                        <Setter Property="Background" Value="#FFffffff" />
+                                        <Setter Property="Foreground" Value="#FF0a0a0a" />
+                                        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                                        <Setter Property="Height" Value="30" />
+                                        <Setter Property="Cursor" Value="Hand" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ToggleButton">
+                                                    <Border Background="{TemplateBinding Background}" BorderBrush="#FFd4d4d4" BorderThickness="1" CornerRadius="3">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                        
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsChecked, ElementName=SlideKey}" Value="True">
+                                                <Setter Property="Background" Value="#FFf5f5f5" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ToggleButton.Style>
+                            </ToggleButton>
+                            <Label Content="This is the key you use to slide." FontSize="10" Foreground="#737373"></Label>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="Jump Key" Foreground="#737373" />
+                            <ToggleButton x:Name="JumpKey" Click="JumpKey_OnClick" Content="{Binding SlideCancelConfiguration.JumpKey, Mode=TwoWay}">
+                                <ToggleButton.Style>
+                                    <Style TargetType="ToggleButton">
+                                        <Setter Property="Background" Value="#FFffffff" />
+                                        <Setter Property="Foreground" Value="#FF0a0a0a" />
+                                        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                                        <Setter Property="Height" Value="30" />
+                                        <Setter Property="Cursor" Value="Hand" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ToggleButton">
+                                                    <Border Background="{TemplateBinding Background}" BorderBrush="#FFd4d4d4" BorderThickness="1" CornerRadius="3">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                        
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsChecked, ElementName=JumpKey}" Value="True">
+                                                <Setter Property="Background" Value="#FFf5f5f5" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ToggleButton.Style>
+                            </ToggleButton>
+                            <Label Content="This is the key you use to jump." FontSize="10" Foreground="#737373"></Label>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="New Slide Cancel" Foreground="#737373" />
+                            <ToggleButton x:Name="NewSlideCancel" IsChecked="{Binding SlideCancelConfiguration.NewSlideCancel, Mode=TwoWay}">
+                                <ToggleButton.Style>
+                                    <Style TargetType="ToggleButton">
+                                        <Setter Property="Background" Value="#FFffffff" />
+                                        <Setter Property="Foreground" Value="#FF0a0a0a" />
+                                        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                                        <Setter Property="Height" Value="30" />
+                                        <Setter Property="Cursor" Value="Hand" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ToggleButton">
+                                                    <Border Background="{TemplateBinding Background}" BorderBrush="#FFd4d4d4" BorderThickness="1" CornerRadius="3">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                        
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#FFf5f5f5" />
+                                            </Trigger>
+                                            <DataTrigger Binding="{Binding IsChecked, ElementName=NewSlideCancel}" Value="True">
+                                                <Setter Property="Content" Value="On"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsChecked, ElementName=NewSlideCancel}" Value="False">
+                                                <Setter Property="Content" Value="Off"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ToggleButton.Style>
+                            </ToggleButton>
+                            <Label Content="This is the new way to slide cancel. Not the MW2019 way." FontSize="10" Foreground="#737373"></Label>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

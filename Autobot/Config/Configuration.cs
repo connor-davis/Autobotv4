@@ -16,6 +16,14 @@ public class Configuration : INotifyPropertyChanged
         Enabled = false
     };
 
+    private SlideCancelConfiguration _slideCancelConfiguration = new()
+    {
+        SlideKey = Key.C,
+        JumpKey = Key.Space,
+        Enabled = false,
+        NewSlideCancel = true
+    };
+
     public SilentShotConfiguration SilentShotConfiguration
     {
         get => _silentShotConfiguration;
@@ -26,6 +34,19 @@ public class Configuration : INotifyPropertyChanged
             _silentShotConfiguration = value;
             
             OnPropertyChanged(nameof(SilentShotConfiguration));
+        }
+    }
+
+    public SlideCancelConfiguration SlideCancelConfiguration
+    {
+        get => _slideCancelConfiguration;
+        set
+        {
+            if (_slideCancelConfiguration == value) return;
+
+            _slideCancelConfiguration = value;
+            
+            OnPropertyChanged(nameof(SlideCancelConfiguration));
         }
     }
 
