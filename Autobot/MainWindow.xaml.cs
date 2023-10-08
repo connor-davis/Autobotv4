@@ -110,13 +110,13 @@ namespace Autobot
             });
         }
         
-        private void UpdateSlideCancelToggleBtnContent(string content)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                SlideCancelTglBtn.Content = content;
-            });
-        }
+        // private void UpdateSlideCancelToggleBtnContent(string content)
+        // {
+        //     Dispatcher.Invoke(() =>
+        //     {
+        //         SlideCancelTglBtn.Content = content;
+        //     });
+        // }
 
         private static void GlobalHookKeyPressed(KeyboardHookEventArgs e)
         {
@@ -142,22 +142,22 @@ namespace Autobot
                     instance.UpdateSilentShotToggleBtnContent("On");
                     Console.Beep();
                 }
-            } else if (e.Data.KeyCode == KeyCode.VcF7)
-            {
-                if (configuration.SlideCancelConfiguration.Enabled)
-                {
-                    configuration.SlideCancelConfiguration.Enabled = false;
-                    instance.UpdateSlideCancelToggleBtnContent("Off");
-                    
-                    Console.Beep();
-                    Console.Beep();
-                }
-                else
-                {
-                    configuration.SlideCancelConfiguration.Enabled = true;
-                    instance.UpdateSlideCancelToggleBtnContent("On");
-                    Console.Beep();
-                }
+                // } else if (e.Data.KeyCode == KeyCode.VcF7)
+                // {
+                //     if (configuration.SlideCancelConfiguration.Enabled)
+                //     {
+                //         configuration.SlideCancelConfiguration.Enabled = false;
+                //         instance.UpdateSlideCancelToggleBtnContent("Off");
+                //         
+                //         Console.Beep();
+                //         Console.Beep();
+                //     }
+                //     else
+                //     {
+                //         configuration.SlideCancelConfiguration.Enabled = true;
+                //         instance.UpdateSlideCancelToggleBtnContent("On");
+                //         Console.Beep();
+                //     }
             } else if (e.Data.KeyCode == KeyMapper.GetSharpHookKeyCode(configuration.SlideCancelConfiguration.SlideKey) && !SlideCancel.isRunning)
             {
                 new Thread(RunSlideCancel).Start();
@@ -171,14 +171,6 @@ namespace Autobot
 
         private void SilentShotBtn_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (Configuration is not { SilentShotConfiguration: not null }) return;
-
-            Configuration.SilentShotConfiguration.Enabled = false;
-            SilentShotTgleBtn.Content = "Off";
-            
-            Console.Beep();
-            Console.Beep();
-            
             SilentShotDialog.Visibility = Visibility.Visible;
         }
 
@@ -207,42 +199,34 @@ namespace Autobot
             }
         }
 
-        private void SlideCancelBtn_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (Configuration is not { SlideCancelConfiguration: not null }) return;
-
-            Configuration.SlideCancelConfiguration.Enabled = false;
-            SlideCancelTglBtn.Content = "Off";
-            
-            Console.Beep();
-            Console.Beep();
-            
-            SlideCancelDialog.Visibility = Visibility.Visible;
-        }
-
-        private void SlideCancelTglBtn_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (Configuration is not { SlideCancelConfiguration: not null }) return;
-                
-            if (Configuration.SlideCancelConfiguration.Enabled)
-            {
-                Configuration.SlideCancelConfiguration.Enabled = false;
-                SlideCancelTglBtn.Content = "Off";
-
-                Console.WriteLine($"Slide Cancel: {Configuration.SlideCancelConfiguration.Enabled}");
-                    
-                Console.Beep();
-                Console.Beep();
-            }
-            else
-            {
-                Configuration.SlideCancelConfiguration.Enabled = true;
-                SlideCancelTglBtn.Content = "On";
-
-                Console.WriteLine($"Slide Cancel: {Configuration.SlideCancelConfiguration.Enabled}");
-                
-                Console.Beep();
-            }
-        }
+        // private void SlideCancelBtn_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        // {
+        //     SlideCancelDialog.Visibility = Visibility.Visible;
+        // }
+        //
+        // private void SlideCancelTglBtn_OnClick(object sender, RoutedEventArgs e)
+        // {
+        //     if (Configuration is not { SlideCancelConfiguration: not null }) return;
+        //         
+        //     if (Configuration.SlideCancelConfiguration.Enabled)
+        //     {
+        //         Configuration.SlideCancelConfiguration.Enabled = false;
+        //         SlideCancelTglBtn.Content = "Off";
+        //
+        //         Console.WriteLine($"Slide Cancel: {Configuration.SlideCancelConfiguration.Enabled}");
+        //             
+        //         Console.Beep();
+        //         Console.Beep();
+        //     }
+        //     else
+        //     {
+        //         Configuration.SlideCancelConfiguration.Enabled = true;
+        //         SlideCancelTglBtn.Content = "On";
+        //
+        //         Console.WriteLine($"Slide Cancel: {Configuration.SlideCancelConfiguration.Enabled}");
+        //         
+        //         Console.Beep();
+        //     }
+        // }
     }
 }

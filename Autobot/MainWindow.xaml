@@ -83,51 +83,51 @@
                         </Grid>
                     </Border>
                     
-                    <Border Grid.Row="2" x:Name="SlideCancelBtn" MouseLeftButtonDown="SlideCancelBtn_OnMouseLeftButtonDown" Cursor="Hand" Padding="5 5" Background="#FFFFFF"  BorderBrush="#FFd4d4d4" BorderThickness="1" CornerRadius="5">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            
-                            <Label Grid.Column="0" Content="Slide Cancel" FontSize="13" VerticalAlignment="Center" Foreground="#737373" />
-                            
-                            <Border Grid.Column="1" BorderBrush="#FFd4d4d4" BorderThickness="1" CornerRadius="3" Padding="1">
-                                <ToggleButton Width="50" x:Name="SlideCancelTglBtn" Click="SlideCancelTglBtn_OnClick" Content="Off">
-                                   <ToggleButton.Style>
-                                       <Style TargetType="ToggleButton">
-                                           <Setter Property="Background" Value="#FFffffff" />
-                                           <Setter Property="Foreground" Value="#FF0a0a0a" />
-                                           <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-                                           <Setter Property="Height" Value="30" />
-                                           <Setter Property="Cursor" Value="Hand" />
-                                           <Setter Property="Template">
-                                               <Setter.Value>
-                                                   <ControlTemplate TargetType="ToggleButton">
-                                                       <Border Background="{TemplateBinding Background}" CornerRadius="3">
-                                                           <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                                       </Border>
-                                                   </ControlTemplate>
-                                               </Setter.Value>
-                                           </Setter>
-   
-                                           <Style.Triggers>
-                                               <Trigger Property="IsMouseOver" Value="True">
-                                                   <Setter Property="Background" Value="#FFf5f5f5" />
-                                               </Trigger>
-                                               <DataTrigger Binding="{Binding IsChecked, ElementName=SilentShotTgleBtn}" Value="True">
-                                                   <Setter Property="Content" Value="On"/>
-                                               </DataTrigger>
-                                               <DataTrigger Binding="{Binding IsChecked, ElementName=SilentShotTgleBtn}" Value="False">
-                                                   <Setter Property="Content" Value="Off"/>
-                                               </DataTrigger>
-                                           </Style.Triggers>
-                                       </Style>
-                                   </ToggleButton.Style>
-                               </ToggleButton>
-                            </Border>
-                        </Grid>
-                    </Border>
+                    <!-- <Border Grid.Row="2" x:Name="SlideCancelBtn" MouseLeftButtonDown="SlideCancelBtn_OnMouseLeftButtonDown" Cursor="Hand" Padding="5 5" Background="#FFFFFF"  BorderBrush="#FFd4d4d4" BorderThickness="1" CornerRadius="5"> -->
+                    <!--     <Grid> -->
+                    <!--         <Grid.ColumnDefinitions> -->
+                    <!--             <ColumnDefinition Width="*"></ColumnDefinition> -->
+                    <!--             <ColumnDefinition Width="Auto"></ColumnDefinition> -->
+                    <!--         </Grid.ColumnDefinitions> -->
+                    <!--          -->
+                    <!--         <Label Grid.Column="0" Content="Slide Cancel" FontSize="13" VerticalAlignment="Center" Foreground="#737373" /> -->
+                    <!--          -->
+                    <!--         <Border Grid.Column="1" BorderBrush="#FFd4d4d4" BorderThickness="1" CornerRadius="3" Padding="1"> -->
+                    <!--             <ToggleButton Width="50" x:Name="SlideCancelTglBtn" Click="SlideCancelTglBtn_OnClick" Content="Off"> -->
+                    <!--                <ToggleButton.Style> -->
+                    <!--                    <Style TargetType="ToggleButton"> -->
+                    <!--                        <Setter Property="Background" Value="#FFffffff" /> -->
+                    <!--                        <Setter Property="Foreground" Value="#FF0a0a0a" /> -->
+                    <!--                        <Setter Property="FocusVisualStyle" Value="{x:Null}" /> -->
+                    <!--                        <Setter Property="Height" Value="30" /> -->
+                    <!--                        <Setter Property="Cursor" Value="Hand" /> -->
+                    <!--                        <Setter Property="Template"> -->
+                    <!--                            <Setter.Value> -->
+                    <!--                                <ControlTemplate TargetType="ToggleButton"> -->
+                    <!--                                    <Border Background="{TemplateBinding Background}" CornerRadius="3"> -->
+                    <!--                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" /> -->
+                    <!--                                    </Border> -->
+                    <!--                                </ControlTemplate> -->
+                    <!--                            </Setter.Value> -->
+                    <!--                        </Setter> -->
+                    <!-- -->
+                    <!--                        <Style.Triggers> -->
+                    <!--                            <Trigger Property="IsMouseOver" Value="True"> -->
+                    <!--                                <Setter Property="Background" Value="#FFf5f5f5" /> -->
+                    <!--                            </Trigger> -->
+                    <!--                            <DataTrigger Binding="{Binding IsChecked, ElementName=SilentShotTgleBtn}" Value="True"> -->
+                    <!--                                <Setter Property="Content" Value="On"/> -->
+                    <!--                            </DataTrigger> -->
+                    <!--                            <DataTrigger Binding="{Binding IsChecked, ElementName=SilentShotTgleBtn}" Value="False"> -->
+                    <!--                                <Setter Property="Content" Value="Off"/> -->
+                    <!--                            </DataTrigger> -->
+                    <!--                        </Style.Triggers> -->
+                    <!--                    </Style> -->
+                    <!--                </ToggleButton.Style> -->
+                    <!--            </ToggleButton> -->
+                    <!--         </Border> -->
+                    <!--     </Grid> -->
+                    <!-- </Border> -->
                 </Grid>
             </Border>
         </Grid>
