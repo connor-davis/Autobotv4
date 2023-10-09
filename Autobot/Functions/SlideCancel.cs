@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using Autobot.Config;
 using Autobot.Utils;
@@ -10,28 +10,27 @@ namespace Autobot.Functions;
 public static class SlideCancel
 {
     private static readonly EventSimulator Simulator = new();
-    public static bool isRunning = false;
+    [SuppressMessage("Usage", "CA2211:Non-constant fields should not be visible")] public static bool IsRunning;
     
     public static void Run(SlideCancelConfiguration configuration)
     {
-        isRunning = true;
-        
         if (!configuration.Enabled) return;
-
+        if (!WindowUtils.GetFocusedWindowTitle().StartsWith(Constants.CallOfDutyTitle)) return;
+        
         if (configuration.NewSlideCancel)
         {
-            isRunning = true;
+            IsRunning = true;
             
             Thread.Sleep(60);
             KeyDown(KeyMapper.GetSharpHookKeyCode(configuration.JumpKey));
             Thread.Sleep(120);
             KeyUp(KeyMapper.GetSharpHookKeyCode(configuration.JumpKey));
 
-            isRunning = false;
+            IsRunning = false;
         }
         else
         {
-            isRunning = true;
+            IsRunning = true;
             
             Thread.Sleep(80);
             KeyDown(KeyMapper.GetSharpHookKeyCode(configuration.SlideKey));
@@ -42,7 +41,7 @@ public static class SlideCancel
             Thread.Sleep(120);
             KeyUp(KeyMapper.GetSharpHookKeyCode(configuration.JumpKey));
             
-            isRunning = false;
+            IsRunning = false;
         }
     }
     

@@ -158,7 +158,7 @@ namespace Autobot
                 //         instance.UpdateSlideCancelToggleBtnContent("On");
                 //         Console.Beep();
                 //     }
-            } else if (e.Data.KeyCode == KeyMapper.GetSharpHookKeyCode(configuration.SlideCancelConfiguration.SlideKey) && !SlideCancel.isRunning)
+            } else if (e.Data.KeyCode == KeyMapper.GetSharpHookKeyCode(configuration.SlideCancelConfiguration.SlideKey) && !SlideCancel.IsRunning)
             {
                 new Thread(RunSlideCancel).Start();
             }

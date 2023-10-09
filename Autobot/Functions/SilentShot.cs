@@ -13,6 +13,7 @@ public static class SilentShot
     public static void Run(SilentShotConfiguration configuration)
     {
         if (!configuration.Enabled) return;
+        if (!WindowUtils.GetFocusedWindowTitle().StartsWith(Constants.CallOfDutyTitle)) return;
         
         Thread.Sleep(configuration.LethalKeyDelay);
         KeyDown(KeyMapper.GetSharpHookKeyCode(configuration.LethalKey));
