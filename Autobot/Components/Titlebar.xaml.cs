@@ -10,6 +10,8 @@ public partial class Titlebar
     public Titlebar()
     {
         InitializeComponent();
+
+        Title.Content = $"Autobot v{Constants.Version}";
     }
     
     private void TitlebarDragArea_MouseDown(object sender, MouseButtonEventArgs e)

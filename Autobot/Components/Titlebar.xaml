@@ -12,7 +12,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Label MouseDown="TitlebarDragArea_MouseDown" Grid.Column="0" VerticalAlignment="Center" Content="Autobot" />
+            <Label x:Name="Title" MouseDown="TitlebarDragArea_MouseDown" Grid.Column="0" VerticalAlignment="Center" Content="Autobot" />
 
             <Border Grid.Column="1" Background="#ffffff" CornerRadius="0 5 0 0" VerticalAlignment="Center">
                 <Grid>
