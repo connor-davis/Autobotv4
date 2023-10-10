@@ -60,9 +60,7 @@ public partial class UpdateWindow
                 var startInfo = new ProcessStartInfo
                 {
                     FileName = $"{DirectoryPath!}\\AutobotUpdater.exe",
-                    RedirectStandardInput = true,
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
+                    UseShellExecute = true,
                     CreateNoWindow = true
                 };
 
@@ -70,10 +68,7 @@ public partial class UpdateWindow
                 
                 process.Start();
                 
-                Dispatcher.Invoke(() =>
-                {
-                    Application.Current.Shutdown();
-                });
+                Environment.Exit(0);
             }
             catch (Exception error)
             {
