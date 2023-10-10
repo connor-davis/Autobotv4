@@ -9,10 +9,7 @@ public static class AutoUpdater
     public static async Task<UpdaterStatus> CheckForUpdates()
     {
         Console.WriteLine("Creating github client.");
-        var gitHubClient = new GitHubClient(new ProductHeaderValue("connor-davis"))
-        {
-            Credentials = new Credentials("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")
-        };
+        var gitHubClient = new GitHubClient(new ProductHeaderValue("connor-davis"));
         Console.WriteLine("Fetching releases.");
         var releases = await gitHubClient.Repository.Release.GetAll("connor-davis", "Autobotv4");
         Console.WriteLine($"Fetched {releases.Count} releases.");

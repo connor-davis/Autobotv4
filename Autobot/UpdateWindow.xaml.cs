@@ -92,10 +92,7 @@ public partial class UpdateWindow
     
     private async void DownloadUpdater()
     {
-        var gitHubClient = new GitHubClient(new ProductHeaderValue("connor-davis"))
-        {
-            Credentials = new Credentials("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")
-        };
+        var gitHubClient = new GitHubClient(new ProductHeaderValue("connor-davis"));
         var releases = await gitHubClient.Repository.Release.GetAll("connor-davis", "AutobotUpdater");
         var latestGithubVersion = new Version(releases[0].TagName.Replace("v", ""));
         var downloadUrl =
