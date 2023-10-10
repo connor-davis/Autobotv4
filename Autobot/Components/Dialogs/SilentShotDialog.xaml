@@ -57,7 +57,7 @@
 
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding IsChecked, ElementName=LethalKey}" Value="True">
-                                                <Setter Property="Background" Value="#FFf5f5f5" />
+                                                <Setter Property="Background" Value="#FF262626" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -96,7 +96,7 @@
 
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding IsChecked, ElementName=WeaponSwapKey}" Value="True">
-                                                <Setter Property="Background" Value="#FFf5f5f5" />
+                                                <Setter Property="Background" Value="#FF262626" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>

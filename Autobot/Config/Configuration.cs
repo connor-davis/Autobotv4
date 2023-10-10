@@ -24,6 +24,8 @@ public class Configuration : INotifyPropertyChanged
         NewSlideCancel = true
     };
 
+    private bool _mustBeep = true;
+
     public SilentShotConfiguration SilentShotConfiguration
     {
         get => _silentShotConfiguration;
@@ -47,6 +49,19 @@ public class Configuration : INotifyPropertyChanged
             _slideCancelConfiguration = value;
             
             OnPropertyChanged(nameof(SlideCancelConfiguration));
+        }
+    }
+
+    public bool MustBeep
+    {
+        get => _mustBeep;
+        set
+        {
+            if (_mustBeep == value) return;
+
+            _mustBeep = value;
+            
+            OnPropertyChanged(nameof(MustBeep));
         }
     }
 

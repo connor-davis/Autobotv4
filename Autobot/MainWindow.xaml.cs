@@ -149,14 +149,21 @@ namespace Autobot
                     configuration.SilentShotConfiguration.Enabled = false;
                     instance.UpdateSilentShotToggleBtnContent("Off");
 
-                    Console.Beep();
-                    Console.Beep();
+                    if (Configuration.MustBeep)
+                    {
+                        Console.Beep();
+                        Console.Beep();
+                    }
                 }
                 else
                 {
                     configuration.SilentShotConfiguration.Enabled = true;
                     instance.UpdateSilentShotToggleBtnContent("On");
-                    Console.Beep();
+                    
+                    if (Configuration.MustBeep)
+                    {
+                        Console.Beep();
+                    }
                 }
                 // } else if (e.Data.KeyCode == KeyCode.VcF7)
                 // {
@@ -203,8 +210,11 @@ namespace Autobot
 
                 Console.WriteLine($"Silent Shot: {Configuration.SilentShotConfiguration.Enabled}");
 
-                Console.Beep();
-                Console.Beep();
+                if (Configuration.MustBeep)
+                {
+                    Console.Beep();
+                    Console.Beep();
+                }
             }
             else
             {
@@ -213,7 +223,10 @@ namespace Autobot
 
                 Console.WriteLine($"Silent Shot: {Configuration.SilentShotConfiguration.Enabled}");
 
-                Console.Beep();
+                if (Configuration.MustBeep)
+                {
+                    Console.Beep();
+                }
             }
         }
 
@@ -246,5 +259,10 @@ namespace Autobot
         //         Console.Beep();
         //     }
         // }
+        
+        private void SettingsBtn_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            SettingsDialog.Visibility = Visibility.Visible;
+        }
     }
 }
