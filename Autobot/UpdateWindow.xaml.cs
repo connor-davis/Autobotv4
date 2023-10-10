@@ -24,7 +24,7 @@ public partial class UpdateWindow
 
         _instance = this;
 
-        if (!File.Exists("AutobotUpdater.exe"))
+        if (!File.Exists($"{DirectoryPath!}\\AutobotUpdater.exe"))
         {
             new Task(DownloadUpdater).Start();
         }
@@ -103,7 +103,7 @@ public partial class UpdateWindow
         try
         {
             await using var fileStream =
-                new FileStream("AutobotUpdater.exe", FileMode.Create, FileAccess.Write, FileShare.None);
+                new FileStream($"{DirectoryPath!}\\AutobotUpdater.exe", FileMode.Create, FileAccess.Write, FileShare.None);
 
             // Send an HTTP GET request to the URL and get the response
             using var response = await httpClient.GetAsync(downloadUrl, HttpCompletionOption.ResponseHeadersRead);
