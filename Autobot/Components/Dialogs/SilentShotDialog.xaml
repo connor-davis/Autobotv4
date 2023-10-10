@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Border Background="#e5e5e5" Padding="5">
+    <Border Background="#FF181818" Padding="5">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
@@ -28,7 +28,7 @@
                 <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Vertical">
-                            <Label Content="Lethal Key Delay" Foreground="#737373" />
+                            <Label Content="Lethal Key Delay" Foreground="#FFFFFFFF" />
                             
                             <TextBox x:Name="LethalKeyDelayTxtBx" TextChanged="LethalKeyDelayTxtBx_OnTextChanged" Text="{Binding SilentShotConfiguration.LethalKeyDelay}" InputScope="Number"/>
                             
@@ -36,19 +36,19 @@
                         </StackPanel>
                         
                         <StackPanel Orientation="Vertical">
-                            <Label Content="Lethal Key" Foreground="#737373" />
+                            <Label Content="Lethal Key" Foreground="#FFFFFFFF" />
                             <ToggleButton x:Name="LethalKey" Click="LethalKey_OnClick" Content="{Binding SilentShotConfiguration.LethalKey, Mode=TwoWay}">
                                 <ToggleButton.Style>
                                     <Style TargetType="ToggleButton">
-                                        <Setter Property="Background" Value="#FFffffff" />
-                                        <Setter Property="Foreground" Value="#FF0a0a0a" />
+                                        <Setter Property="Background" Value="#FF181818" />
+                                        <Setter Property="Foreground" Value="#FFffffff" />
                                         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
                                         <Setter Property="Height" Value="30" />
                                         <Setter Property="Cursor" Value="Hand" />
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="ToggleButton">
-                                                    <Border Background="{TemplateBinding Background}" BorderBrush="#FFd4d4d4" BorderThickness="1" CornerRadius="3">
+                                                    <Border Background="{TemplateBinding Background}" BorderBrush="#FF404040" BorderThickness="1" CornerRadius="3">
                                                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                                     </Border>
                                                 </ControlTemplate>
@@ -67,7 +67,7 @@
                         </StackPanel>
                         
                         <StackPanel Orientation="Vertical">
-                            <Label Content="Weapon Swap Delay" Foreground="#737373" />
+                            <Label Content="Weapon Swap Delay" Foreground="#FFFFFFFF" />
                             
                             <TextBox x:Name="WeaponSwapDelayTxtBx" TextChanged="WeaponSwapDelayTxtBx_OnTextChanged" Text="{Binding SilentShotConfiguration.WeaponSwapKeyDelay}" InputScope="Number"/>
                             
@@ -75,19 +75,19 @@
                         </StackPanel>
                         
                         <StackPanel Orientation="Vertical">
-                            <Label Content="Weapon Swap Key" Foreground="#737373" />
+                            <Label Content="Weapon Swap Key" Foreground="#FFFFFFFF" />
                             <ToggleButton x:Name="WeaponSwapKey" Click="WeaponSwapKey_OnClick" Content="{Binding SilentShotConfiguration.WeaponSwapKey, Mode=TwoWay}">
                                 <ToggleButton.Style>
                                     <Style TargetType="ToggleButton">
-                                        <Setter Property="Background" Value="#FFffffff" />
-                                        <Setter Property="Foreground" Value="#FF0a0a0a" />
+                                        <Setter Property="Background" Value="#FF181818" />
+                                        <Setter Property="Foreground" Value="#FFffffff" />
                                         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
                                         <Setter Property="Height" Value="30" />
                                         <Setter Property="Cursor" Value="Hand" />
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="ToggleButton">
-                                                    <Border Background="{TemplateBinding Background}" BorderBrush="#FFd4d4d4" BorderThickness="1" CornerRadius="3">
+                                                    <Border Background="{TemplateBinding Background}" BorderBrush="#FF404040" BorderThickness="1" CornerRadius="3">
                                                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                                     </Border>
                                                 </ControlTemplate>

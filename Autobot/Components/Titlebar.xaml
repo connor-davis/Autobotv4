@@ -5,26 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
              d:DesignHeight="30" d:DesignWidth="500">
-    <Border  Background="#e5e5e5" CornerRadius="5 5 0 0">
-        <Grid Height="30">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-
-            <Label x:Name="Title" MouseDown="TitlebarDragArea_MouseDown" Grid.Column="0" VerticalAlignment="Center" Content="Autobot" />
-
-            <Border Grid.Column="1" Background="#ffffff" CornerRadius="0 5 0 0" VerticalAlignment="Center">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30" />
-                        <ColumnDefinition Width="30" />
-                    </Grid.ColumnDefinitions>
-
-                    <Button Click="MinimizeBtn_Click" Grid.Column="0" Content="−" FontSize="15" FontWeight="Bold" Style="{StaticResource MenuButton}" />
-                    <Button Click="CloseBtn_Click" Grid.Column="1" Content="✕" FontWeight="Bold" Style="{StaticResource CloseButton}" />
-                </Grid>
-            </Border>
-        </Grid>
-    </Border>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="30" />
+        </Grid.ColumnDefinitions>
+        
+        <Label x:Name="DragArea" Padding="10 0 0 0" MouseDown="DragArea_MouseDown" Grid.Column="0" VerticalAlignment="Center" Content="Autobot Setup" Foreground="#FFFFFFFF" />
+        
+        <Button x:Name="MinimizeBtn" Click="MinimizeBtn_Click" Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource MinimizeButton}" Foreground="#FFFFFFFF" Content="−" FontSize="15" FontWeight="Bold" />
+        <Button x:Name="CloseBtn" Click="CloseBtn_Click" Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource CloseButton}" Foreground="#FFFFFFFF" Content="✕" FontWeight="Bold" />
+    </Grid>
 </UserControl>
