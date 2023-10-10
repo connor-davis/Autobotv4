@@ -2,6 +2,6 @@
 
 public static class Constants
 {
-    public const string Version = "1.0.6";
+    public const string Version = "1.0.7";
     public const string CallOfDutyTitle = "Call of Duty\u00ae";
 }
