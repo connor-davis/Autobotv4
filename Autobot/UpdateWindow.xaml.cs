@@ -3,11 +3,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using Autobot.Utils;
 using Octokit;
+using Application = System.Windows.Application;
 using FileMode = System.IO.FileMode;
 
 namespace Autobot;
@@ -48,15 +47,7 @@ public partial class UpdateWindow
         });
     }
 
-    private void SetUpdateStatusContent(string content)
-    {
-        Dispatcher.Invoke(() =>
-        {
-            UpdateStatus.Content = content;
-        });
-    }
-
-    private static async void CheckForUpdates()
+    private async void CheckForUpdates()
     {
         var updateStatus = await AutoUpdater.CheckForUpdates();
         
@@ -69,13 +60,20 @@ public partial class UpdateWindow
                 var startInfo = new ProcessStartInfo
                 {
                     FileName = $"{DirectoryPath!}\\AutobotUpdater.exe",
-                    UseShellExecute = false,
+                    RedirectStandardInput = true,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
                     CreateNoWindow = true
                 };
 
-                Process.Start(startInfo);
-
-                Environment.Exit(0);
+                var process = new Process { StartInfo = startInfo };
+                
+                process.Start();
+                
+                Dispatcher.Invoke(() =>
+                {
+                    Application.Current.Shutdown();
+                });
             }
             catch (Exception error)
             {
@@ -92,9 +90,12 @@ public partial class UpdateWindow
         }
     }
     
-    private static async void DownloadUpdater()
+    private async void DownloadUpdater()
     {
-        var gitHubClient = new GitHubClient(new ProductHeaderValue("connor-davis"));
+        var gitHubClient = new GitHubClient(new ProductHeaderValue("connor-davis"))
+        {
+            Credentials = new Credentials("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")
+        };
         var releases = await gitHubClient.Repository.Release.GetAll("connor-davis", "AutobotUpdater");
         var latestGithubVersion = new Version(releases[0].TagName.Replace("v", ""));
         var downloadUrl =
@@ -112,9 +113,6 @@ public partial class UpdateWindow
 
             // Check if the response is successful
             response.EnsureSuccessStatusCode();
-
-            // Get the content length (file size) from the response headers
-            var totalBytes = response.Content.Headers.ContentLength.GetValueOrDefault();
 
             // Create a buffer for downloading data in chunks
             var buffer = new byte[8192];
