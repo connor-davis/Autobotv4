@@ -84,9 +84,9 @@ public partial class UpdateWindow
         else
         {
             Console.WriteLine("No update found.");
-            
-            _instance?.CloseWindow();
+
             _instance?.OpenMainWindow();
+            _instance?.CloseWindow();
         }
     }
     
