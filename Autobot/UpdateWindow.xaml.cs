@@ -24,10 +24,15 @@ public partial class UpdateWindow
         InitializeComponent();
 
         _instance = this;
-        
-        if (!File.Exists("AutobotUpdater.exe")) new Task(DownloadUpdater).Start();
 
-        new Task(CheckForUpdates).Start();
+        if (!File.Exists("AutobotUpdater.exe"))
+        {
+            new Task(DownloadUpdater).Start();
+        }
+        else
+        {
+            new Task(CheckForUpdates).Start();
+        }
     }
 
     private void CloseWindow()
@@ -125,6 +130,8 @@ public partial class UpdateWindow
             }
 
             fileStream.Close();
+            
+            new Task(CheckForUpdates).Start();
         }
         catch (Exception e)
         {
