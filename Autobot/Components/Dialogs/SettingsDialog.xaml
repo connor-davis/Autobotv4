@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Autobot.Components.Dialogs"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Border Background="#FF181818" Padding="5">
+    <Border Background="#FF181818" CornerRadius="0 0 10 10" Padding="5">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
