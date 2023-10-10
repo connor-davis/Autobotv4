@@ -34,10 +34,24 @@ namespace Autobot
 
             _instance = this;
 
-            if (!File.Exists(ConfigurationPath)) File.Create(ConfigurationPath);
+            if (!File.Exists(ConfigurationPath))
+            {
+                File.Create(ConfigurationPath);
 
+                SetDataContext(ConfigurationPath);
+            }
+            else
+            {
+                SetDataContext(ConfigurationPath);
+            }
+
+            Subscribe();
+        }
+
+        private void SetDataContext(string configurationPath)
+        {
             Configuration =
-                SLAPI.ReadFromJsonFile<Configuration>($"{ConfigurationPath}") ??
+                SLAPI.ReadFromJsonFile<Configuration>($"{configurationPath}") ??
                 new Configuration
                 {
                     SilentShotConfiguration = new SilentShotConfiguration
@@ -58,8 +72,6 @@ namespace Autobot
                 };
 
             DataContext = Configuration;
-
-            Subscribe();
         }
 
         public static MainWindow? GetInstance()
