@@ -76,7 +76,7 @@ public partial class SilentShotDialog
             if (configuration is not { SilentShotConfiguration: not null }) return;
             
             configuration.SilentShotConfiguration.LethalKey = KeyMapper.GetKeyCode(e.Data.KeyCode);
-            SLAPI.WriteToJsonFile("autobot-config.json", configuration);
+            SLAPI.WriteToJsonFile(MainWindow.GetInstance()!.ConfigurationPath, configuration);
         } else if (_isWeaponSwapKeyBeingEdited)
         {
             var configuration = MainWindow.GetConfiguration();
@@ -84,7 +84,7 @@ public partial class SilentShotDialog
             if (configuration is not { SilentShotConfiguration: not null }) return;
 
             configuration.SilentShotConfiguration.WeaponSwapKey = KeyMapper.GetKeyCode(e.Data.KeyCode);
-            SLAPI.WriteToJsonFile("autobot-config.json", configuration);
+            SLAPI.WriteToJsonFile(MainWindow.GetInstance()!.ConfigurationPath, configuration);
         }
     }
     
@@ -99,7 +99,7 @@ public partial class SilentShotDialog
             if (configuration is not { SilentShotConfiguration: not null }) return;
 
             configuration.SilentShotConfiguration.LethalKeyDelay = delay;
-            SLAPI.WriteToJsonFile("autobot-config.json", configuration);
+            SLAPI.WriteToJsonFile(MainWindow.GetInstance()!.ConfigurationPath, configuration);
         }
         catch
         {
@@ -118,7 +118,7 @@ public partial class SilentShotDialog
             if (configuration is not { SilentShotConfiguration: not null }) return;
 
             configuration.SilentShotConfiguration.WeaponSwapKeyDelay = delay;
-            SLAPI.WriteToJsonFile("autobot-config.json", configuration);
+            SLAPI.WriteToJsonFile(MainWindow.GetInstance()!.ConfigurationPath, configuration);
         }
         catch
         {

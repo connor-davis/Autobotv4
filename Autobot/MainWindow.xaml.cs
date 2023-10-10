@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
@@ -21,7 +22,13 @@ namespace Autobot
         private static MainWindow? _instance;
         private readonly SimpleReactiveGlobalHook _globalHook = new();
 
-        static Configuration Configuration { get; set; } = null!;
+        private static readonly string? AssemblyCodeBase = Assembly
+            .GetExecutingAssembly().GetName().CodeBase;
+
+        private static readonly string? Path = System.IO.Path.GetDirectoryName(AssemblyCodeBase);
+        public readonly string ConfigurationPath = $"{Path}/autobot-config.json";
+
+        private static Configuration Configuration { get; set; } = null!;
 
         public MainWindow()
         {
@@ -29,29 +36,31 @@ namespace Autobot
 
             _instance = this;
 
-            if (!File.Exists("autobot-config.json")) File.Create("autobot-config.json");
+            if (!File.Exists(ConfigurationPath)) File.Create(ConfigurationPath);
 
-            Configuration = SLAPI.ReadFromJsonFile<Configuration>(Directory.GetCurrentDirectory() + "//autobot-config.json") ?? new Configuration
-            {
-                SilentShotConfiguration = new SilentShotConfiguration
+            Configuration =
+                SLAPI.ReadFromJsonFile<Configuration>($"//{ConfigurationPath}") ??
+                new Configuration
                 {
-                    LethalKey = Key.E,
-                    WeaponSwapKey = Key.D1,
-                    LethalKeyDelay = 21,
-                    WeaponSwapKeyDelay = 100,
-                    Enabled = false
-                },
-                SlideCancelConfiguration = new SlideCancelConfiguration
-                {
-                    SlideKey = Key.C,
-                    JumpKey = Key.Space,
-                    Enabled = false,
-                    NewSlideCancel = true
-                }
-            };
+                    SilentShotConfiguration = new SilentShotConfiguration
+                    {
+                        LethalKey = Key.E,
+                        WeaponSwapKey = Key.D1,
+                        LethalKeyDelay = 21,
+                        WeaponSwapKeyDelay = 100,
+                        Enabled = false
+                    },
+                    SlideCancelConfiguration = new SlideCancelConfiguration
+                    {
+                        SlideKey = Key.C,
+                        JumpKey = Key.Space,
+                        Enabled = false,
+                        NewSlideCancel = true
+                    }
+                };
 
             DataContext = Configuration;
-            
+
             Subscribe();
         }
 
@@ -68,9 +77,9 @@ namespace Autobot
         private void MainWindow_OnClosed(object? sender, EventArgs e)
         {
             Configuration.SilentShotConfiguration.Enabled = false;
-            
-            SLAPI.WriteToJsonFile(Directory.GetCurrentDirectory() + "//autobot-config.json", Configuration);
-            
+
+            SLAPI.WriteToJsonFile($"//{ConfigurationPath}", Configuration);
+
             Unsubscribe();
         }
 
@@ -104,12 +113,9 @@ namespace Autobot
 
         private void UpdateSilentShotToggleBtnContent(string content)
         {
-            Dispatcher.Invoke(() =>
-            {
-                SilentShotTgleBtn.Content = content;
-            });
+            Dispatcher.Invoke(() => { SilentShotTgleBtn.Content = content; });
         }
-        
+
         // private void UpdateSlideCancelToggleBtnContent(string content)
         // {
         //     Dispatcher.Invoke(() =>
@@ -122,17 +128,17 @@ namespace Autobot
         {
             var configuration = GetConfiguration();
             var instance = GetInstance();
-            
+
             if (configuration is not { SilentShotConfiguration: not null }) return;
             if (instance is null) return;
-            
+
             if (e.Data.KeyCode == KeyCode.VcF6)
             {
                 if (configuration.SilentShotConfiguration.Enabled)
                 {
                     configuration.SilentShotConfiguration.Enabled = false;
                     instance.UpdateSilentShotToggleBtnContent("Off");
-                    
+
                     Console.Beep();
                     Console.Beep();
                 }
@@ -158,7 +164,9 @@ namespace Autobot
                 //         instance.UpdateSlideCancelToggleBtnContent("On");
                 //         Console.Beep();
                 //     }
-            } else if (e.Data.KeyCode == KeyMapper.GetSharpHookKeyCode(configuration.SlideCancelConfiguration.SlideKey) && !SlideCancel.IsRunning)
+            }
+            else if (e.Data.KeyCode == KeyMapper.GetSharpHookKeyCode(configuration.SlideCancelConfiguration.SlideKey) &&
+                     !SlideCancel.IsRunning)
             {
                 new Thread(RunSlideCancel).Start();
             }
@@ -177,14 +185,14 @@ namespace Autobot
         private void SilentShotTgleBtn_OnClick(object sender, RoutedEventArgs e)
         {
             if (Configuration is not { SilentShotConfiguration: not null }) return;
-                
+
             if (Configuration.SilentShotConfiguration.Enabled)
             {
                 Configuration.SilentShotConfiguration.Enabled = false;
                 SilentShotTgleBtn.Content = "Off";
 
                 Console.WriteLine($"Silent Shot: {Configuration.SilentShotConfiguration.Enabled}");
-                    
+
                 Console.Beep();
                 Console.Beep();
             }
@@ -194,7 +202,7 @@ namespace Autobot
                 SilentShotTgleBtn.Content = "On";
 
                 Console.WriteLine($"Silent Shot: {Configuration.SilentShotConfiguration.Enabled}");
-                
+
                 Console.Beep();
             }
         }

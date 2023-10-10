@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using Autobot.Config;
 using Autobot.Utils;
@@ -9,8 +8,8 @@ namespace Autobot.Components.Dialogs;
 
 public partial class SlideCancelDialog
 {
-    private static bool _isSlideKeyBeingEdited = false;
-    private static bool _isJumpKeyBeingEdited = false;
+    private static bool _isSlideKeyBeingEdited;
+    private static bool _isJumpKeyBeingEdited;
     
     public SlideCancelDialog()
     {
@@ -36,7 +35,7 @@ public partial class SlideCancelDialog
             
             configuration.SlideCancelConfiguration.SlideKey = KeyMapper.GetKeyCode(e.Data.KeyCode);
             
-            SLAPI.WriteToJsonFile("autobot-config.json", configuration);
+            SLAPI.WriteToJsonFile(MainWindow.GetInstance()!.ConfigurationPath, configuration);
         } else if (_isJumpKeyBeingEdited)
         {
             var configuration = MainWindow.GetConfiguration();
@@ -44,7 +43,7 @@ public partial class SlideCancelDialog
             if (configuration is not { SlideCancelConfiguration: not null }) return;
 
             configuration.SlideCancelConfiguration.JumpKey = KeyMapper.GetKeyCode(e.Data.KeyCode);
-            SLAPI.WriteToJsonFile("autobot-config.json", configuration);
+            SLAPI.WriteToJsonFile(MainWindow.GetInstance()!.ConfigurationPath, configuration);
         }
     }
     
