@@ -22,11 +22,9 @@ namespace Autobot
         private static MainWindow? _instance;
         private readonly SimpleReactiveGlobalHook _globalHook = new();
 
-        private static readonly string? AssemblyCodeBase = Assembly
-            .GetExecutingAssembly().GetName().CodeBase;
-
-        private static readonly string? Path = System.IO.Path.GetDirectoryName(AssemblyCodeBase);
-        public readonly string ConfigurationPath = $"{Path}/autobot-config.json";
+        private static readonly string? DirectoryPath =
+            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        public readonly string ConfigurationPath = $"{DirectoryPath}/autobot-config.json";
 
         private static Configuration Configuration { get; set; } = null!;
 
@@ -39,7 +37,7 @@ namespace Autobot
             if (!File.Exists(ConfigurationPath)) File.Create(ConfigurationPath);
 
             Configuration =
-                SLAPI.ReadFromJsonFile<Configuration>($"//{ConfigurationPath}") ??
+                SLAPI.ReadFromJsonFile<Configuration>($"{ConfigurationPath}") ??
                 new Configuration
                 {
                     SilentShotConfiguration = new SilentShotConfiguration
@@ -78,7 +76,7 @@ namespace Autobot
         {
             Configuration.SilentShotConfiguration.Enabled = false;
 
-            SLAPI.WriteToJsonFile($"//{ConfigurationPath}", Configuration);
+            SLAPI.WriteToJsonFile($"{ConfigurationPath}", Configuration);
 
             Unsubscribe();
         }

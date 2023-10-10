@@ -26,6 +26,8 @@ public static class SLAPI
             
             writer = new StreamWriter(filePath, append);
             writer.Write(contentsToWriteToFile);
+            
+            writer.Close();
         }
         finally
         {
@@ -49,6 +51,8 @@ public static class SLAPI
             reader = new StreamReader(filePath);
             
             var fileContents = reader.ReadToEnd();
+            
+            reader.Close();
             
             return JsonConvert.DeserializeObject<T>(fileContents);
         }

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
 using Autobot.Utils;
 
 namespace Autobot;
@@ -12,7 +10,7 @@ namespace Autobot;
 public partial class UpdateWindow
 {
     private static UpdateWindow? _instance;
-    private MainWindow _mainWindow = new();
+    private readonly MainWindow _mainWindow = new();
     
     public UpdateWindow()
     {
