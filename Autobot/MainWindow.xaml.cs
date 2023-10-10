@@ -33,26 +33,23 @@ namespace Autobot
             InitializeComponent();
 
             _instance = this;
-
-            if (!File.Exists(ConfigurationPath))
-            {
-                File.Create(ConfigurationPath);
-
-                SetDataContext(ConfigurationPath);
-            }
-            else
-            {
-                SetDataContext(ConfigurationPath);
-            }
+            
+            SetDataContext(ConfigurationPath);
 
             Subscribe();
         }
 
         private void SetDataContext(string configurationPath)
         {
-            Configuration =
-                SLAPI.ReadFromJsonFile<Configuration>($"{configurationPath}") ??
-                new Configuration
+            try
+            {
+                Configuration = SLAPI.ReadFromJsonFile<Configuration>($"{configurationPath}")!;
+                
+                DataContext = Configuration;
+            }
+            catch
+            {
+                Configuration = new Configuration
                 {
                     SilentShotConfiguration = new SilentShotConfiguration
                     {
@@ -70,8 +67,11 @@ namespace Autobot
                         NewSlideCancel = true
                     }
                 };
-
-            DataContext = Configuration;
+                
+                SLAPI.WriteToJsonFile(ConfigurationPath, Configuration);
+                
+                DataContext = Configuration;
+            }
         }
 
         public static MainWindow? GetInstance()
