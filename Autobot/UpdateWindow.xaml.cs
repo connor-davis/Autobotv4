@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
+using System.Net.Http;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using Autobot.Utils;
+using Octokit;
+using FileMode = System.IO.FileMode;
 
 namespace Autobot;
 
@@ -11,18 +16,20 @@ public partial class UpdateWindow
 {
     private static UpdateWindow? _instance;
     private readonly MainWindow _mainWindow = new();
+    private static readonly string? DirectoryPath =
+        Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
     
     public UpdateWindow()
     {
         InitializeComponent();
 
         _instance = this;
+        
+        if (!File.Exists("AutobotUpdater.exe")) new Task(DownloadUpdater).Start();
 
-        Task.Run(async () =>
-        {
-            await CheckForUpdates();
-        });
+        new Task(CheckForUpdates).Start();
     }
+
     private void CloseWindow()
     {
         Dispatcher.Invoke(Close);
@@ -44,56 +51,26 @@ public partial class UpdateWindow
         });
     }
 
-    private void FinishUpdate()
-    {
-        Dispatcher.Invoke(() =>
-        {
-            try
-            {
-                Application.Current.Shutdown();
-            }
-            catch
-            {
-                // ignored
-            }
-
-            var process = new Process();
-
-            process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.RedirectStandardInput = true;
-            process.StartInfo.RedirectStandardOutput = false;
-            process.StartInfo.CreateNoWindow = false;
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            process.Start();
-
-            process.StandardInput.WriteLineAsync(@"copy /y .\Update\Autobot.dll Autobot.dll");
-            process.StandardInput.FlushAsync();
-
-            process.StandardInput.Close();
-
-            process.WaitForExitAsync();
-        });
-    }
-
-    private static async Task CheckForUpdates()
+    private static async void CheckForUpdates()
     {
         var updateStatus = await AutoUpdater.CheckForUpdates();
         
         if (updateStatus == UpdaterStatus.OutDated)
         {
             Console.WriteLine("Update found. Downloading the update.");
-            _instance?.SetUpdateStatusContent(("Update found. Downloading the update."));
-            
+
             try
             {
-                await AutoUpdater.DownloadAndInstallUpdate();
-                
-                _instance?.SetUpdateStatusContent("Update downloaded. Please rerun Autobot.");
-                
-                Thread.Sleep(1000);
-                
-                _instance?.FinishUpdate();
+                var startInfo = new ProcessStartInfo
+                {
+                    FileName = $"{DirectoryPath!}\\AutobotUpdater.exe",
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                Process.Start(startInfo);
+
+                Environment.Exit(0);
             }
             catch (Exception error)
             {
@@ -107,6 +84,51 @@ public partial class UpdateWindow
             
             _instance?.CloseWindow();
             _instance?.OpenMainWindow();
+        }
+    }
+    
+    private static async void DownloadUpdater()
+    {
+        var gitHubClient = new GitHubClient(new ProductHeaderValue("connor-davis"));
+        var releases = await gitHubClient.Repository.Release.GetAll("connor-davis", "AutobotUpdater");
+        var latestGithubVersion = new Version(releases[0].TagName.Replace("v", ""));
+        var downloadUrl =
+            $"https://github.com/connor-davis/AutobotUpdater/releases/download/v{latestGithubVersion}/AutobotUpdater.exe";
+
+        using var httpClient = new HttpClient();
+
+        try
+        {
+            await using var fileStream =
+                new FileStream("AutobotUpdater.exe", FileMode.Create, FileAccess.Write, FileShare.None);
+
+            // Send an HTTP GET request to the URL and get the response
+            using var response = await httpClient.GetAsync(downloadUrl, HttpCompletionOption.ResponseHeadersRead);
+
+            // Check if the response is successful
+            response.EnsureSuccessStatusCode();
+
+            // Get the content length (file size) from the response headers
+            var totalBytes = response.Content.Headers.ContentLength.GetValueOrDefault();
+
+            // Create a buffer for downloading data in chunks
+            var buffer = new byte[8192];
+                
+            // Create a stream to read the response content
+            await using var contentStream = await response.Content.ReadAsStreamAsync();
+            int bytesReadThisChunk;
+
+            while ((bytesReadThisChunk = await contentStream.ReadAsync(buffer)) > 0)
+            {
+                // Write the downloaded data to the file
+                await fileStream.WriteAsync(buffer.AsMemory(0, bytesReadThisChunk));
+            }
+
+            fileStream.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
         }
     }
 }
