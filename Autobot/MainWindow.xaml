@@ -15,7 +15,8 @@
         BorderBrush="{x:Null}"
         Background="Transparent"
         Closed="MainWindow_OnClosed"
-        Width="400" Height="600">
+        Width="400"
+        SizeToContent="Height">
     <Border Padding="10">
         <Border.Effect>
             <DropShadowEffect Color="Black" Opacity="0.1" BlurRadius="10" ShadowDepth="5" />

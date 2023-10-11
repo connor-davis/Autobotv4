@@ -154,23 +154,7 @@ namespace Autobot
                         Console.Beep();
                         Console.Beep();
                     }
-                } else if (e.Data.KeyCode == KeyCode.VcF7)
-                {
-                    if (configuration.SlideCancelConfiguration.Enabled)
-                    {
-                        configuration.SlideCancelConfiguration.Enabled = false;
-                        instance.UpdateSlideCancelToggleBtnContent("Off");
-
-                        Console.Beep();
-                        Console.Beep();
-                    }
-                    else
-                    {
-                        configuration.SlideCancelConfiguration.Enabled = true;
-                        instance.UpdateSlideCancelToggleBtnContent("On");
-                        Console.Beep();
-                    }
-                }
+                } 
                 else
                 {
                     configuration.SilentShotConfiguration.Enabled = true;
@@ -180,7 +164,30 @@ namespace Autobot
                     {
                         Console.Beep();
                     }
-                
+                }
+            }
+            else if (e.Data.KeyCode == KeyCode.VcF7)
+            {
+                if (configuration.SlideCancelConfiguration.Enabled)
+                {
+                    configuration.SlideCancelConfiguration.Enabled = false;
+                    instance.UpdateSlideCancelToggleBtnContent("Off");
+
+                    if (Configuration.MustBeep)
+                    {
+                        Console.Beep();
+                        Console.Beep();
+                    }
+                }
+                else
+                {
+                    configuration.SlideCancelConfiguration.Enabled = true;
+                    instance.UpdateSlideCancelToggleBtnContent("On");
+                        
+                    if (Configuration.MustBeep)
+                    {
+                        Console.Beep();
+                    }
                 }
             }
             else if (e.Data.KeyCode == KeyMapper.GetSharpHookKeyCode(configuration.SlideCancelConfiguration.SlideKey) &&
