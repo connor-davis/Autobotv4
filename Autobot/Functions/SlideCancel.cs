@@ -16,15 +16,17 @@ public static class SlideCancel
     {
         if (!configuration.Enabled) return;
         if (!WindowUtils.GetFocusedWindowTitle().StartsWith(Constants.CallOfDutyTitle)) return;
+        if (IsRunning) return;
         
         if (configuration.NewSlideCancel)
         {
             IsRunning = true;
             
-            Thread.Sleep(60);
-            KeyDown(KeyMapper.GetSharpHookKeyCode(configuration.JumpKey));
-            Thread.Sleep(120);
-            KeyUp(KeyMapper.GetSharpHookKeyCode(configuration.JumpKey));
+            Thread.Sleep(80);
+            KeyDown(KeyMapper.GetSharpHookKeyCode(configuration.SlideKey));
+            Thread.Sleep(80);
+            KeyUp(KeyMapper.GetSharpHookKeyCode(configuration.SlideKey));
+            Thread.Sleep(500);
 
             IsRunning = false;
         }
@@ -40,6 +42,7 @@ public static class SlideCancel
             KeyDown(KeyMapper.GetSharpHookKeyCode(configuration.JumpKey));
             Thread.Sleep(120);
             KeyUp(KeyMapper.GetSharpHookKeyCode(configuration.JumpKey));
+            Thread.Sleep(500);
             
             IsRunning = false;
         }

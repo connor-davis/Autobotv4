@@ -1,16 +1,47 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autobot", "Autobot\Autobot.csproj", "{7155AA10-F132-4B6D-992D-F46A3D1F215F}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autobot", "Autobot\Autobot.csproj", "{7155AA10-F132-4B6D-992D-F46A3D1F215F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{7155AA10-F132-4B6D-992D-F46A3D1F215F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7155AA10-F132-4B6D-992D-F46A3D1F215F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7155AA10-F132-4B6D-992D-F46A3D1F215F}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{7155AA10-F132-4B6D-992D-F46A3D1F215F}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{7155AA10-F132-4B6D-992D-F46A3D1F215F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7155AA10-F132-4B6D-992D-F46A3D1F215F}.Debug|x64.Build.0 = Debug|Any CPU
+		{7155AA10-F132-4B6D-992D-F46A3D1F215F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7155AA10-F132-4B6D-992D-F46A3D1F215F}.Debug|x86.Build.0 = Debug|Any CPU
 		{7155AA10-F132-4B6D-992D-F46A3D1F215F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7155AA10-F132-4B6D-992D-F46A3D1F215F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7155AA10-F132-4B6D-992D-F46A3D1F215F}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{7155AA10-F132-4B6D-992D-F46A3D1F215F}.Release|ARM64.Build.0 = Release|Any CPU
+		{7155AA10-F132-4B6D-992D-F46A3D1F215F}.Release|x64.ActiveCfg = Release|Any CPU
+		{7155AA10-F132-4B6D-992D-F46A3D1F215F}.Release|x64.Build.0 = Release|Any CPU
+		{7155AA10-F132-4B6D-992D-F46A3D1F215F}.Release|x86.ActiveCfg = Release|Any CPU
+		{7155AA10-F132-4B6D-992D-F46A3D1F215F}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A80002DF-B1E2-42B1-B317-37AC1C76BC24}
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 EndGlobal
