@@ -116,8 +116,6 @@ public partial class UpdateWindow
             }
 
             fileStream.Close();
-            
-            new Task(CheckForUpdates).Start();
         }
         catch (Exception e)
         {
