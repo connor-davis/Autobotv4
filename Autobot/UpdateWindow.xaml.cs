@@ -25,7 +25,7 @@ public partial class UpdateWindow
 
         _instance = this;
 
-        new Task(DownloadUpdater).Start();
+        new Task(CheckForUpdates).Start();
     }
 
     private void CloseWindow()
