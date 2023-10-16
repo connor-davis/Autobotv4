@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -24,14 +25,7 @@ public partial class UpdateWindow
 
         _instance = this;
 
-        if (!File.Exists($"{DirectoryPath!}\\AutobotUpdater.exe"))
-        {
-            new Task(DownloadUpdater).Start();
-        }
-        else
-        {
-            new Task(CheckForUpdates).Start();
-        }
+        new Task(DownloadUpdater).Start();
     }
 
     private void CloseWindow()
@@ -54,6 +48,8 @@ public partial class UpdateWindow
         if (updateStatus == UpdaterStatus.OutDated)
         {
             Console.WriteLine("Update found. Downloading the update.");
+            
+            new Task(DownloadUpdater).Start();
 
             try
             {
@@ -87,6 +83,8 @@ public partial class UpdateWindow
     
     private async void DownloadUpdater()
     {
+        if (File.Exists($"{DirectoryPath!}\\AutobotUpdater.exe")) File.Delete($"{DirectoryPath!}\\AutobotUpdater.exe");
+        
         var gitHubClient = new GitHubClient(new ProductHeaderValue("connor-davis"));
         var releases = await gitHubClient.Repository.Release.GetAll("connor-davis", "AutobotUpdater");
         var latestGithubVersion = new Version(releases[0].TagName.Replace("v", ""));
