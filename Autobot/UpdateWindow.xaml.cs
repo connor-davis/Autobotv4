@@ -48,27 +48,6 @@ public partial class UpdateWindow
             Console.WriteLine("Update found. Downloading the update.");
             
             new Task(DownloadUpdater).Start();
-
-            try
-            {
-                var startInfo = new ProcessStartInfo
-                {
-                    FileName = $"{DirectoryPath!}\\AutobotUpdater.exe",
-                    UseShellExecute = true,
-                    CreateNoWindow = true
-                };
-
-                var process = new Process { StartInfo = startInfo };
-                
-                process.Start();
-                
-                Environment.Exit(0);
-            }
-            catch (Exception error)
-            {
-                Console.WriteLine(error);
-                Console.WriteLine("Error");
-            }
         }
         else
         {
@@ -116,6 +95,27 @@ public partial class UpdateWindow
             }
 
             fileStream.Close();
+            
+            try
+            {
+                var startInfo = new ProcessStartInfo
+                {
+                    FileName = $"{DirectoryPath!}\\AutobotUpdater.exe",
+                    UseShellExecute = true,
+                    CreateNoWindow = true
+                };
+
+                var process = new Process { StartInfo = startInfo };
+                
+                process.Start();
+                
+                Environment.Exit(0);
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine(error);
+                Console.WriteLine("Error");
+            }
         }
         catch (Exception e)
         {
