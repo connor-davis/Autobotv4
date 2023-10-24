@@ -7,7 +7,7 @@ namespace Autobot;
 
 public partial class Authentication
 {
-    public static api KeyAuth = new(
+    public static readonly api KeyAuth = new(
         name: "Autobot",
         // ReSharper disable once StringLiteralTypo
         ownerid: "P4VflvP4pl",
@@ -35,10 +35,10 @@ public partial class Authentication
             
         if (KeyAuth.response.success)
         {
-            var mainWindow = new MainWindow();
-        
-            mainWindow.Show();
-            Close();
+            var updateWindow = new UpdateWindow();
+            
+            updateWindow.Show();
+            Hide();
         }
         else
             StatusLbl.Content = KeyAuth.response.message;
