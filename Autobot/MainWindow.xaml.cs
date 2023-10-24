@@ -33,10 +33,34 @@ namespace Autobot
             InitializeComponent();
 
             _instance = this;
+
+            if (SubExist("silent-shot"))
+            {
+                SilentShotBtn.Visibility = Visibility.Visible;
+                Console.WriteLine("silent-shot");
+            }
+            
+            if (SubExist("slide-cancel"))
+            {
+                SlideCancelBtn.Visibility = Visibility.Visible;
+                Console.WriteLine("slide-cancel");
+            }
+            
+            if (SubExist("slide-cancel+silent-shot"))
+            {
+                SlideCancelBtn.Visibility = Visibility.Visible;
+                SilentShotBtn.Visibility = Visibility.Visible;
+                Console.WriteLine("slide-cancel+silent-shot");
+            }
             
             SetDataContext(ConfigurationPath);
 
             Subscribe();
+        }
+
+        private static bool SubExist(string name)
+        {
+            return Authentication.KeyAuth.user_data.subscriptions.Exists(x => x.subscription == name);
         }
 
         private void SetDataContext(string configurationPath)
@@ -91,6 +115,8 @@ namespace Autobot
             SLAPI.WriteToJsonFile($"{ConfigurationPath}", Configuration);
 
             Unsubscribe();
+            
+            Authentication.KeyAuth.logout();
         }
 
         private void Subscribe()
