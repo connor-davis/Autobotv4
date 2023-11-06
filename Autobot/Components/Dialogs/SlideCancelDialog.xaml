@@ -89,43 +89,6 @@
                             </ToggleButton>
                             <Label Content="This is the key you use to jump." FontSize="10" Foreground="#737373"></Label>
                         </StackPanel>
-                        
-                        <StackPanel Orientation="Vertical">
-                            <Label Content="New Slide Cancel" Foreground="#FFFFFFFF" />
-                            <ToggleButton x:Name="NewSlideCancel" IsChecked="{Binding SlideCancelConfiguration.NewSlideCancel, Mode=TwoWay}">
-                                <ToggleButton.Style>
-                                    <Style TargetType="ToggleButton">
-                                        <Setter Property="Background" Value="#FF181818" />
-                                        <Setter Property="Foreground" Value="#FFFFFFFF" />
-                                        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-                                        <Setter Property="Height" Value="30" />
-                                        <Setter Property="Cursor" Value="Hand" />
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="ToggleButton">
-                                                    <Border Background="{TemplateBinding Background}" BorderBrush="#FF404040" BorderThickness="1" CornerRadius="3">
-                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                        
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="#FF262626" />
-                                            </Trigger>
-                                            <DataTrigger Binding="{Binding IsChecked, ElementName=NewSlideCancel}" Value="True">
-                                                <Setter Property="Content" Value="On"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding IsChecked, ElementName=NewSlideCancel}" Value="False">
-                                                <Setter Property="Content" Value="Off"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </ToggleButton.Style>
-                            </ToggleButton>
-                            <Label Content="This is the new way to slide cancel. Not the MW2019 way." FontSize="10" Foreground="#737373"></Label>
-                        </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
             </Grid>

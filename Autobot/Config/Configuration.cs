@@ -20,8 +20,7 @@ public class Configuration : INotifyPropertyChanged
     {
         SlideKey = Key.C,
         JumpKey = Key.Space,
-        Enabled = false,
-        NewSlideCancel = true
+        Enabled = false
     };
 
     private bool _mustBeep = true;

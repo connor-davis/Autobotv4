@@ -87,8 +87,7 @@ namespace Autobot
                     {
                         SlideKey = Key.C,
                         JumpKey = Key.Space,
-                        Enabled = false,
-                        NewSlideCancel = true
+                        Enabled = false
                     }
                 };
                 
@@ -175,11 +174,10 @@ namespace Autobot
                     configuration.SilentShotConfiguration.Enabled = false;
                     instance.UpdateSilentShotToggleBtnContent("Off");
 
-                    if (Configuration.MustBeep)
-                    {
-                        Console.Beep();
-                        Console.Beep();
-                    }
+                    if (!Configuration.MustBeep) return;
+                    
+                    Console.Beep();
+                    Console.Beep();
                 } 
                 else
                 {
@@ -244,11 +242,10 @@ namespace Autobot
 
                 Console.WriteLine($"Silent Shot: {Configuration.SilentShotConfiguration.Enabled}");
 
-                if (Configuration.MustBeep)
-                {
-                    Console.Beep();
-                    Console.Beep();
-                }
+                if (!Configuration.MustBeep) return;
+                
+                Console.Beep();
+                Console.Beep();
             }
             else
             {
